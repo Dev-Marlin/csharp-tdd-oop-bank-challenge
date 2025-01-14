@@ -21,7 +21,7 @@ namespace Boolean.CSharp.Test
         {
             BankAccount ba = new CurrentAccount();
 
-            Assert.That(ba.ID, Is.EqualTo(null));
+            Assert.That(ba.ID, !Is.EqualTo(null));
         }
 
         [Test]
@@ -36,11 +36,11 @@ namespace Boolean.CSharp.Test
             ba.Withdraw(900);
             ba.Withdraw(1627);
 
-            List<Transaction> statement = ba.GetStatement();
+            List<ITransaction> statement = ba.GetStatement();
             
             StringBuilder sb = new StringBuilder();
 
-            foreach (Transaction t in statement)
+            foreach (MyTransaction t in statement)
             {
                 sb.Append(t.Date.ToString() +" "+ t.Amount + " " + t.Balance +"\n");
             }
@@ -57,7 +57,7 @@ namespace Boolean.CSharp.Test
 
             ba.Deposit(-5000);
 
-            Assert.That(ba.Balance(), !Is.Equals(-5000));
+            Assert.That(ba.Balance, !Is.EqualTo(-5000));
         }
 
         [Test]
@@ -66,8 +66,8 @@ namespace Boolean.CSharp.Test
             BankAccount ba = new CurrentAccount();
 
             ba.Deposit(387);
-
-            Assert.That(ba.Balance(), Is.Equals(387));
+            double balance = ba.Balance;
+            Assert.That(ba.Balance, Is.EqualTo(387));
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestPositiveWithdraw()
         {
-            BankAccount ba = new CurrentAccount();
+            BankAccount ba = new CurrentAccount(800);
 
             bool withdraw = ba.Withdraw(547);
 
@@ -113,17 +113,15 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestTransactionDate()
         {
-            DateTime dateTime = DateTime.Now;
-            ITransaction transaction = new Transaction(dateTime, 500, 2677);
+            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677);
 
-            Assert.That(transaction.Date, Is.EqualTo(dateTime));
+            Assert.That(transaction.Date, !Is.EqualTo(null));
         }
 
         [Test]
         public void TestTransactionBalance()
         {
-            DateTime dateTime = DateTime.Now;
-            ITransaction transaction = new Transaction(dateTime, 500, 2677);
+            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677);
 
             Assert.That(transaction.Balance, Is.EqualTo(2677));
         }
@@ -131,8 +129,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestTransactionAmount()
         {
-            DateTime dateTime = DateTime.Now;
-            ITransaction transaction = new Transaction(dateTime, 500, 2677);
+            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677);
 
             Assert.That(transaction.Amount, Is.EqualTo(500));
         }

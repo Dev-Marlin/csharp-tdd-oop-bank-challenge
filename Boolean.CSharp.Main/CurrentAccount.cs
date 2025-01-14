@@ -6,7 +6,36 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    internal class CurrentAccount : BankAccount
+    public class CurrentAccount : BankAccount
     {
+        public CurrentAccount() 
+        {
+            Balance = 0;
+        }
+
+        public CurrentAccount(double startBalance)
+        {
+            Balance = startBalance;
+        }
+
+        public override void Deposit(double amount)
+        {
+            if(amount > 0)
+            {
+                Balance += amount;
+                transactions.Add(new MyTransaction(amount, Balance));
+            }
+        }
+
+        public override bool Withdraw(double amount)
+        {
+            if (amount <= Balance && amount > 0)
+            {
+                Balance += amount;
+                transactions.Add(new MyTransaction(amount, Balance));
+                return true;
+            }
+            return false;
+        }
     }
 }
