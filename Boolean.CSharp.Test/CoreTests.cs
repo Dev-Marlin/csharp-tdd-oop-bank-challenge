@@ -42,7 +42,7 @@ namespace Boolean.CSharp.Test
 
             foreach (MyTransaction t in statement)
             {
-                sb.Append(t.Date.ToString() +" "+ t.Amount + " " + t.Balance +"\n");
+                sb.Append(t.Date.ToString() +" "+ t.Amount + " " + t.Balance + " "+t.Type +"\n");
             }
 
             Console.WriteLine(sb.ToString());
@@ -107,13 +107,13 @@ namespace Boolean.CSharp.Test
 
             ba.Withdraw(547);
 
-            Assert.That(ba.Balance, Is.EqualTo(1347));
+            Assert.That(ba.Balance, Is.EqualTo(253));
         }
 
         [Test]
         public void TestTransactionDate()
         {
-            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677);
+            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677, TransactionType.Credit);
 
             Assert.That(transaction.Date, !Is.EqualTo(null));
         }
@@ -121,7 +121,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestTransactionBalance()
         {
-            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677);
+            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677, TransactionType.Credit);
 
             Assert.That(transaction.Balance, Is.EqualTo(2677));
         }
@@ -129,10 +129,9 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestTransactionAmount()
         {
-            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677);
+            ITransaction transaction = (ITransaction)new MyTransaction(500, 2677, TransactionType.Credit);
 
             Assert.That(transaction.Amount, Is.EqualTo(500));
         }
-
     }
 }

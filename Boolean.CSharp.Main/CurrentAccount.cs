@@ -23,7 +23,7 @@ namespace Boolean.CSharp.Main
             if(amount > 0)
             {
                 Balance += amount;
-                transactions.Add(new MyTransaction(amount, Balance));
+                transactions.Add(new MyTransaction(amount, Balance, TransactionType.Debit));
             }
         }
 
@@ -31,8 +31,8 @@ namespace Boolean.CSharp.Main
         {
             if (amount <= Balance && amount > 0)
             {
-                Balance += amount;
-                transactions.Add(new MyTransaction(amount, Balance));
+                Balance -= amount;
+                transactions.Add(new MyTransaction(amount, Balance, TransactionType.Credit));
                 return true;
             }
             return false;

@@ -11,5 +11,6 @@ namespace Boolean.CSharp.Main
         public DateTime Date { get; }
         public double Amount { get; }
         public double Balance { get; }
+        public TransactionType Type { get; }
     }
 }
