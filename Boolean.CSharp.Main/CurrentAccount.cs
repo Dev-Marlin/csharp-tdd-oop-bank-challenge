@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boolean.CSharp.Main.Enums;
-//using Twilio;
-//using Twilio.Rest.Api.V2010.Account;
 
 namespace Boolean.CSharp.Main
 {
@@ -47,17 +45,20 @@ namespace Boolean.CSharp.Main
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.Append("date        || credit   || debit   || balance \n");
+
             foreach(ITransaction t in transactions)
             {
-
+                if (t.Type == TransactionType.Debit)
+                {
+                    sb.Append(String.Format("{0, -11} ||          || {1,-8}|| {2, -8}\n", t.Date.Date.ToString("d"), t.Amount, t.Balance));
+                }
+                
+                if(t.Type == TransactionType.Credit)
+                {
+                    sb.Append(String.Format("{0, -11} || {1,-9}||         || {2, -8}\n", t.Date.Date.ToString("d"), t.Amount, t.Balance));
+                }
             }
-
-            /*
-            var message = MessageResource.Create(
-                from: new Twilio.Types.PhoneNumber(bankPhone),
-                body: sb.ToString(),
-                to: new Twilio.Types.PhoneNumber("+15558675310")
-            );*/
 
             return sb.ToString();
         }

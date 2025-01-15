@@ -46,9 +46,12 @@ namespace Boolean.CSharp.Test
             ba.Withdraw(900);
             ba.Withdraw(1627);
 
-            string sms = ""; // ba.SendSms();
 
-            Assert.That(sms, Is.EqualTo(""));
+            string sms = ba.SendSms("+15017154661");
+
+            Console.WriteLine(sms);
+
+            Assert.That(sms, !Is.EqualTo(""));
         }
 
         [Test]
