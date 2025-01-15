@@ -20,7 +20,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestGuid()
         {
-            BankAccount ba = new CurrentAccount();
+            BankAccount ba = new CurrentAccount(Branch.Stockholm, "+15017122661");
 
             Assert.That(ba.ID, !Is.EqualTo(null));
         }
@@ -28,7 +28,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestStatement()
         {
-            BankAccount ba = new CurrentAccount();
+            BankAccount ba = new CurrentAccount(Branch.Oslo, "+15017122661");
 
             ba.Deposit(5000);
             ba.Withdraw(300);
@@ -54,7 +54,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestNegativeDeposit()
         {
-            BankAccount ba = new CurrentAccount();
+            BankAccount ba = new CurrentAccount(Branch.London, "+15017122661");
 
             ba.Deposit(-5000);
 
@@ -64,7 +64,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestPositiveDeposit()
         {
-            BankAccount ba = new CurrentAccount();
+            BankAccount ba = new CurrentAccount(Branch.London, "+15017122661");
 
             ba.Deposit(387);
             double balance = ba.Balance;
@@ -74,7 +74,7 @@ namespace Boolean.CSharp.Test
         [Test]
         public void TestNegativeWithdraw()
         {
-            BankAccount ba = new CurrentAccount();
+            BankAccount ba = new CurrentAccount(Branch.London, "+15017122661");
 
             bool withdraw = ba.Withdraw(-547);
 
