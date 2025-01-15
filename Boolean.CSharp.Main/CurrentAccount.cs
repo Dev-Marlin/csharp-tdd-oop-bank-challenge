@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Boolean.CSharp.Main.Enums;
-using Twilio;
-using Twilio.Rest.Api.V2010.Account;
+//using Twilio;
+//using Twilio.Rest.Api.V2010.Account;
 
 namespace Boolean.CSharp.Main
 {
@@ -52,11 +52,14 @@ namespace Boolean.CSharp.Main
 
             }
 
+            /*
             var message = MessageResource.Create(
                 from: new Twilio.Types.PhoneNumber(bankPhone),
                 body: sb.ToString(),
                 to: new Twilio.Types.PhoneNumber("+15558675310")
-            );
+            );*/
+
+            return sb.ToString();
         }
 
         public override bool Withdraw(double amount)
